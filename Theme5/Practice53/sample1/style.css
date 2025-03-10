@@ -59,6 +59,7 @@ body {
 
 /* Заголовок */
 .header {
+    
     padding: 20px;
     background-color: var(--color-secondary-bg);
     text-align: center;
