@@ -17,7 +17,7 @@ Object.entries(ranks).forEach(([rank, count]) => {
 });
 
 // Графік по групам
-const ctx = document.getElementById('chartGroups').getContext('2d');
+const ctx = document.getElementById('chart1').getContext('2d');
 new Chart(ctx, {
   type: 'bar',
   data: {
@@ -25,8 +25,8 @@ new Chart(ctx, {
     datasets: [{
       label: 'Кількість військових',
       data: mockData.groups.map(g => g.students.length),
-      backgroundColor: 'rgba(54, 162, 235, 0.5)',
-      borderColor: 'rgba(54, 162, 235, 1)',
+      backgroundColor: 'rgba(3, 83, 29, 0.6)',
+      borderColor: 'rgb(2, 38, 10)',
       borderWidth: 1
     }]
   },
@@ -35,6 +35,21 @@ new Chart(ctx, {
       y: { beginAtZero: true }
     }
   }
+});
+
+// Заповнення таблиці
+const tbody = document.querySelector('#student-table tbody');
+mockData.groups.forEach(group => {
+  group.students.forEach(student => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="p-2">${student.full_name}</td>
+      <td class="p-2">${student.birth_date}</td>
+      <td class="p-2">${student.rank_name}</td>
+      <td class="p-2">${group.group_name}</td>
+    `;
+    tbody.appendChild(row);
+  });
 });
 
 // Ініціалізація карти
@@ -52,18 +67,5 @@ locations.forEach(loc => {
   L.marker(loc.coords).addTo(map).bindPopup(loc.group);
 });
 
-// Заповнення таблиці
-const tbody = document.querySelector('#student-table tbody');
-mockData.groups.forEach(group => {
-  group.students.forEach(student => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="p-2">${student.full_name}</td>
-      <td class="p-2">${student.birth_date}</td>
-      <td class="p-2">${student.rank_name}</td>
-      <td class="p-2">${group.group_name}</td>
-    `;
-    tbody.appendChild(row);
-  });
-});
+
 
