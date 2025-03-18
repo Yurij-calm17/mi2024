@@ -121,9 +121,7 @@ body {
 
 .graph-placeholder {
     
-    width: 100%;
-    height: auto;
-    background-color: var(--color-placeholder);
+    width: 100%;        
     border-radius: 4px;
     overflow-x: auto;
     white-space: nowrap;
