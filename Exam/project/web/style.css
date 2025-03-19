@@ -1,7 +1,7 @@
 /* CSS-змінні відповідно до брендбуку ЗСУ */
 :root {
-    --color-primary: #005a34;       /* Темно-зелений */
-    --color-accent: #ffdd00;        /* Жовтий */
+    --color-primary: #035C6B;       /* Основний */
+    --color-accent: #ffdd00;        /* Додатковий */
     --color-background: #f7f9fa;    /* Фон */
     --color-secondary-bg: #e6e8ea;  /* Заголовки */
     --color-text: #333333;          /* Текст */

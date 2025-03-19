@@ -39,47 +39,58 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.entries(locationSummary).forEach(([location, total]) => {
       const card = document.createElement("div");
       card.className = "info-box";
-      card.innerHTML = `<strong>Напрям ${location}</strong>: ${total}`;
+      card.innerHTML = `<strong>Локація ${location}</strong>: ${total}`;
       infoCards.appendChild(card);
     });
   }
 
   function updateBarChart(data) {
-    const labels = [...new Set(data.map((item) => item.date))]; // Унікальні дати
-    const locations = [...new Set(data.map((item) => item.location))]; // Унікальні локації
+    const labels = [...new Set(data.map(item => item.date))]; // Унікальні дати
+    const locations = [...new Set(data.map(item => item.location))]; // Унікальні локації
 
-    const datasets = locations.map((location) => ({
-      label: `Локація ${location}`,
-      data: labels.map((date) => {
-        const found = data.find(
-          (entry) => entry.date === date && entry.location === location
-        );
-        return found ? found.data_field : 0;
-      }),
-      backgroundColor: getRandomColor(0.6),
-      borderColor: getRandomColor(),
-      borderWidth: 1,
-    }));
+    // Визначаємо базовий колір (наприклад, синій)
+    const baseColor = { r: 3, g: 92, b: 107 };
+
+    // Початковий рівень прозорості та крок
+    const startAlpha = 0.8;
+    const alphaStep = 0.25;
+
+    const datasets = locations.map((location, index) => {
+        // Обчислюємо прозорість (не більше 1)
+        let alpha = Math.max(startAlpha - index * alphaStep, .2);
+
+        return {
+            label: `Локація ${location}`,
+            data: labels.map(date => {
+                const found = data.find(entry => entry.date === date && entry.location === location);
+                return found ? found.data_field : 0;
+            }),
+            backgroundColor: `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, ${alpha})`,
+            borderColor: `rgba(${baseColor.r}, ${baseColor.g}, ${baseColor.b}, 1)`,
+            borderWidth: 1,
+        };
+    });
 
     const ctx = document.getElementById("chart1").getContext("2d");
     if (window.myChart) {
-      window.myChart.destroy();
+        window.myChart.destroy();
     }
     window.myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        labels,
-        datasets,
-      },
-      options: {
-        responsive: true,
-        scales: {
-          x: { stacked: true },
-          y: { beginAtZero: true, stacked: true },
+        type: "bar",
+        data: {
+            labels,
+            datasets,
         },
-      },
+        options: {
+            responsive: true,
+            scales: {
+                x: { stacked: true },
+                y: { beginAtZero: true, stacked: true },
+            },
+        },
     });
-  }
+}
+
 
   function updateMap() {
     if (!map) {
