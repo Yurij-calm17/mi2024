@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Object.entries(locationSummary).forEach(([location, total]) => {
       const card = document.createElement("div");
       card.className = "info-box";
-      card.innerHTML = `<strong>Локація ${location}</strong>: ${total}`;
+      card.innerHTML = `<strong>Напрям ${location}</strong>: ${total}`;
       infoCards.appendChild(card);
     });
   }
