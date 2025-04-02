@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 # Налаштування підключення до БД
-DB_NAME = "exam2025_1"
+DB_NAME = "exam_251"
 DB_USER = "postgres"         # замініть за потреби
 DB_PASSWORD = "admin"     # замініть за потреби
 DB_HOST = "localhost"        # або інша адреса/хост, якщо потрібно
@@ -39,7 +39,7 @@ def get_locations():
         
         query = """SELECT date, location, enemy_losses_tank as data_field
 FROM battle_reports
-WHERE date >= CURRENT_DATE - INTERVAL '12 days'
+WHERE date >= CURRENT_DATE - INTERVAL '19 days'
 ORDER BY date DESC, location;
 """
 
