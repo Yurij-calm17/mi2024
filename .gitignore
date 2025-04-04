@@ -1,5 +1,5 @@
 .venv
 .zip
-__pycache__
+*pycache*
 
-.pyc
+*.pyc
