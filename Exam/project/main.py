@@ -39,7 +39,7 @@ def get_locations():
         
         query = """SELECT date, location, enemy_losses_tank as data_field
 FROM battle_reports
-WHERE date >= CURRENT_DATE - INTERVAL '12 days'
+WHERE date >= CURRENT_DATE - INTERVAL '19 days'
 ORDER BY date DESC, location;
 """
 
